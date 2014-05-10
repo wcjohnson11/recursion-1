@@ -5,19 +5,21 @@
 
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className){
-	var collection = [], index = 0, pattern = new RegExp("(^|\\s)"+className+"(\\s|$)");
+	var collection = [], index = 0;
 	
 	function classFilter(element) {
-		if ( pattern.test(element.className) ){
+		if (element.classList.contains(className)){
+
 			collection[index] = element;
 			index++;
 		} 
 		var children = element.children;
+
 		for(var i = 0; i < children.length; i++) {
 		  classFilter(children[i]);
 		}
 	}
-	
-	classFilter(document);
+
+	classFilter(document.body);
 	return collection;
 };
